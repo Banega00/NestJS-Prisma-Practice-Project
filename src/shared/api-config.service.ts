@@ -16,15 +16,9 @@ export class ApiConfigService{
 
     }
 
-    get port(): EnvConfigType['PORT']{
-        return +(this.configService.get<string>('PORT') ?? this.configService.get<string>('port')) ?? 3000;
-    }
-
-    get env(): EnvConfigType['NODE_ENV']{
-        return this.configService.get<EnvConfigType['NODE_ENV']>('NODE_ENV') ?? 'development';
-    }
-
-    get isDevOrTest(): boolean{
-        return this.env === 'development' || this.env === 'test';
+    public env = {
+        envType: this.configService.get<EnvConfigType['NODE_ENV']>('NODE_ENV') ?? 'development',
+        isDevOrTest: this.configService.get<EnvConfigType['NODE_ENV']>('NODE_ENV') === 'development' || this.configService.get<EnvConfigType['NODE_ENV']>('NODE_ENV') === 'test',
+        port: +(this.configService.get<string>('PORT') ?? this.configService.get<string>('port')) ?? 3000
     }
 }
