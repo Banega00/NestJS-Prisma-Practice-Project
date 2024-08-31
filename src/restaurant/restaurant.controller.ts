@@ -2,8 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RestaurantService } from './restaurant.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import { Restaurant } from './entities/restaurant.entity';
 
-@Controller('restaurant')
+@Controller('restaurants')
 export class RestaurantController {
   constructor(private readonly restaurantService: RestaurantService) {}
 
@@ -18,8 +19,10 @@ export class RestaurantController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.restaurantService.findOne(+id);
+  async findOne(@Param('id') id: Restaurant['id']) {
+    const restaurant = await this.restaurantService.findOne(id);
+    
+    return restaurant;
   }
 
   @Patch(':id')

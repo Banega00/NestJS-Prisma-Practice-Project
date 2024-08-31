@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './user.repository';
 import { ulid } from 'ulid'
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -21,8 +22,8 @@ export class UserService {
     return this.userRepository.findAllUsers();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: User['id']) {
+    return this.userRepository.findUserById(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

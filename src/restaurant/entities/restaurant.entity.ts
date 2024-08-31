@@ -1,8 +1,4 @@
-import { User as PrismaUser } from '.prisma/client';
-
-export interface User extends PrismaUser{
-    id: string;
-    email: string;
-    name: string;
-    surname: string;
+import { Restaurant as PrismaRestaurant } from '@prisma/client';
+export interface Restaurant extends PrismaRestaurant{
 }
+
