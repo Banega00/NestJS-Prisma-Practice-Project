@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { envValidationSchema } from './shared/api-config.service';
 
 @Module({
-  imports: [DatabaseModule, UserModule, RestaurantModule, 
+  imports: [DatabaseModule, UserModule, RestaurantModule,
   SharedModule
   ],
   controllers: [AppController],

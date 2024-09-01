@@ -4,6 +4,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { ApiConfigService } from './shared/api-config.service';
 import { CustomError, CustomErrorType } from './errors/custom.error';
 import { GlobalExceptionFilter } from './errors/global-exception-filter';
+import { LoggingService } from './shared/logging.service';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
@@ -27,6 +29,13 @@ async function bootstrap() {
 
 	app.useGlobalFilters(new GlobalExceptionFilter(apiConfigService));
 
+	app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+
+	const logger = app.get(LoggingService);
+
 	await app.listen(apiConfigService.env.port);
+
+	
+
 }
 bootstrap();
